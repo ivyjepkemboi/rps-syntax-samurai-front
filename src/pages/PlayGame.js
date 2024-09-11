@@ -1,17 +1,25 @@
 import React, { useState } from "react";
-import Game from "../components/Game";
+import UserVsComputer from "../components/UserVsComputer";
+import UserVsUser from "../components/UserVsUser";
 
 const PlayGame = () => {
   const [gameMode, setGameMode] = useState("");
+  const [resetGame, setResetGame] = useState(false);
 
   const selectGameMode = (mode) => {
     setGameMode(mode);
+    setResetGame(false);  // Reset the game when switching modes
+  };
+
+  const resetHandler = () => {
+    setResetGame(true);
+    setGameMode("");
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-lg p-8 bg-white shadow-md rounded-lg text-center">
-        {!gameMode ? (
+        {!gameMode || resetGame ? (
           <>
             <h2 className="text-3xl font-bold text-gray-800 mb-6">
               Choose your game mode
@@ -31,8 +39,10 @@ const PlayGame = () => {
               </button>
             </div>
           </>
+        ) : gameMode === "computer" ? (
+          <UserVsComputer onReset={resetHandler} />
         ) : (
-          <Game mode={gameMode} />
+          <UserVsUser onReset={resetHandler} />
         )}
       </div>
     </div>

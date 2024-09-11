@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import PlayGame from "./pages/PlayGame";
+import UserVsUser from "./components/UserVsUser";
+import UserVsComputer from "./components/UserVsComputer";
 
 function App() {
   return (
